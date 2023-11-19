@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Img, Link, Text, Fade } from "@chakra-ui/react";
+import { Box, Img, Link, Text, Fade } from "@chakra-ui/react";
+import CustomButton from "./components/CustomButton";
 
 interface StartScreenProps {
   onStartGame: () => void;
@@ -37,7 +38,6 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
     <Box
       sx={{
         height: "100vh",
-        backgroundColor: "#102152",
         display: "grid",
         gridTemplateRows: "auto auto auto 1fr auto",
       }}
@@ -81,12 +81,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
           </Link>
         </Text>
       </Fade>
-      <Button
-        onClick={onStartGame}
-        sx={{ margin: "2em", backgroundColor: "#21bab4", color: "#fdffff", fontWeight: "700" }}
-      >
-        Start Game
-      </Button>
+      <CustomButton onButtonClick={onStartGame} text="Start Game" margin="2em" />
     </Box>
   );
 };

@@ -2,8 +2,9 @@ import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import StartScreen from "./StartScreen";
 import SelectEgg from "./components/SelectEgg";
+import PetHome from "./components/PetHome";
 
-type GameView = "StartScreen" | "SelectEgg";
+type GameView = "StartScreen" | "SelectEgg" | "PetHome";
 
 const Main: React.FC = () => {
   const [gameView, setGameView] = useState<GameView>("StartScreen");
@@ -13,9 +14,12 @@ const Main: React.FC = () => {
   };
 
   return (
-    <Box>
+    <Box backgroundColor="#102152">
       {gameView === "StartScreen" && <StartScreen onStartGame={() => onNavigateTo("SelectEgg")} />}
-      {gameView === "SelectEgg" && <SelectEgg onCancelGame={() => onNavigateTo("StartScreen")} />}
+      {gameView === "SelectEgg" && (
+        <SelectEgg onCancelGame={() => onNavigateTo("StartScreen")} onContinue={() => onNavigateTo("PetHome")} />
+      )}
+      {gameView === "PetHome" && <PetHome />}
     </Box>
   );
 };
