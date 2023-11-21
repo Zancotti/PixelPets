@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import StartScreen from "./StartScreen";
-import SelectEgg from "./components/SelectEgg";
-import PetHome from "./components/PetHome";
+import SelectEgg from "./SelectEgg";
+import PetHome from "./PetHome";
 
 type GameView = "StartScreen" | "SelectEgg" | "PetHome";
 

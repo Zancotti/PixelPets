@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Img, Link, Text, Fade } from "@chakra-ui/react";
-import CustomButton from "./components/CustomButton";
+import CustomButton from "./CustomButton";
 
 interface StartScreenProps {
   onStartGame: () => void;
@@ -43,16 +43,10 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
       }}
     >
       <Fade in={fadeInPicture} transition={{ enter: { duration: 1 } }}>
-        <Img src="./pictures/PixelPetsBackground.webp" sx={{ width: "100%" }} />
+        <Img src="./pictures/pixelPetsBackground.webp" sx={{ width: "100%" }} />
       </Fade>
       <Fade in={fadeInText1} transition={{ enter: { duration: 0.5 } }}>
-        <Text
-          fontSize="5vh"
-          fontWeight={700}
-          color="#fdffff
-"
-          textAlign="center"
-        >
+        <Text fontSize="5vh" fontWeight={700} color="#fdffff" textAlign="center">
           Adopt your
         </Text>
       </Fade>

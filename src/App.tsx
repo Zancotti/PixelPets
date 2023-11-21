@@ -1,6 +1,5 @@
-import React from "react";
-import Main from "./Main";
 import { ChakraProvider } from "@chakra-ui/react";
+import Main from "./components/Main";
 
 const App = () => {
   return (

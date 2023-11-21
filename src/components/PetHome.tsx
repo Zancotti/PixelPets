@@ -8,8 +8,8 @@ const PetHome: React.FC = () => {
         <Image
           src="./pictures/hatchingBackground.webp"
           alt="Picture of Pixel Pet egg hatching place"
+          backgroundSize="contain"
           width="100%"
-          height="auto"
         />
         <Image src="./pictures/egg.webp" position="absolute" top="30%" left="33vw" zIndex="1" />
       </Box>
