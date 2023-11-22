@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Img, Link, Text, Fade } from "@chakra-ui/react";
 import CustomButton from "./CustomButton";
+import { orangeColor, whiteColor } from "../colors";
 
 interface StartScreenProps {
   onStartGame: () => void;
@@ -46,31 +47,19 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
         <Img src="./pictures/pixelPetsBackground.webp" sx={{ width: "100%" }} />
       </Fade>
       <Fade in={fadeInText1} transition={{ enter: { duration: 0.5 } }}>
-        <Text fontSize="5vh" fontWeight={700} color="#fdffff" textAlign="center">
+        <Text fontSize="5vh" fontWeight={700} color={whiteColor} textAlign="center">
           Adopt your
         </Text>
       </Fade>
       <Fade in={fadeInText2} transition={{ enter: { duration: 0.5 } }}>
-        <Text
-          fontSize="5vh"
-          fontWeight={700}
-          color="#fdffff
-"
-          textAlign="center"
-        >
+        <Text fontSize="5vh" fontWeight={700} color={whiteColor} textAlign="center">
           pixel pet today!
         </Text>
       </Fade>
       <Fade in={fadeInText3} transition={{ enter: { duration: 0.5 } }}>
-        <Text
-          fontSize="2.3vh"
-          sx={{ marginTop: "1em" }}
-          color="#fdffff
-"
-          textAlign="center"
-        >
+        <Text fontSize="2.3vh" sx={{ marginTop: "1em" }} color={whiteColor} textAlign="center">
           A game by{" "}
-          <Link color="#ff7852" isExternal href="https://github.com/Zancotti">
+          <Link color={orangeColor} rel="noopener noreferrer" isExternal href="https://github.com/Zancotti">
             Sabrina Zancotti
           </Link>
         </Text>

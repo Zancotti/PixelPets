@@ -1,11 +1,14 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import Main from "./components/Main";
+import PixelPetsProvider from "./context/PixelPetsContext";
 
 const App = () => {
   return (
-    <ChakraProvider>
-      <Main />
-    </ChakraProvider>
+    <PixelPetsProvider>
+      <ChakraProvider>
+        <Main />
+      </ChakraProvider>
+    </PixelPetsProvider>
   );
 };
 
