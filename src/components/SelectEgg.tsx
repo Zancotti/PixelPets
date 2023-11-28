@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Fade, Text, Image } from "@chakra-ui/react";
 import CustomButton from "./CustomButton";
 import { orangeColor, pinkColor, whiteColor } from "../colors";
-import { usePixelPetsContext } from "../context/PixelPetsContext";
+import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
 
 interface SelectEggProps {
   onCancelGame: () => void;
@@ -30,7 +30,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
   ];
 
   useEffect(() => {
-    if (selectedEggNr) setSelectedEgg(eggs[selectedEggNr]);
+    if (selectedEggNr) setSelectedEgg(eggs[selectedEggNr - 1]);
   }, [selectedEggNr]);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
     <Box
       h="100vh"
       display="grid"
-      gridTemplateRows="auto auto 1fr auto"
+      gridTemplateRows="auto auto auto 1fr"
       rowGap="2em"
       padding="2em"
       sx={{
@@ -80,31 +80,60 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
         {eggs.map((egg) => {
           return (
             <Fade key={egg.id} in={egg.fadeIn} transition={{ enter: { duration: 0.5 } }}>
-              <Image
-                onClick={() => setSelectedEggNr(egg.id)}
-                h="100px"
-                src={egg.src}
-                className={selectedEggNr === egg.id ? "floating" : ""}
-                sx={{
-                  webkitFilter: selectedEggNr === egg.id ? "drop-shadow(12px 12px 7px rgba(255, 255, 255, 0.5))" : "",
-                  filter: selectedEggNr === egg.id ? "drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.5))" : "",
-                  animation: selectedEggNr === egg.id ? "float 2s ease-in-out infinite" : "none",
-                }}
-              />
+              <Box display="flex" justifyContent="center">
+                <Image
+                  onClick={() => setSelectedEggNr(egg.id)}
+                  h="100px"
+                  src={egg.src}
+                  className={selectedEggNr === egg.id ? "floating" : ""}
+                  sx={{
+                    "@keyframes float": {
+                      "0%": {
+                        transform: "translateY(0)",
+                      },
+                      "50%": {
+                        transform: "translateY(-10px)",
+                      },
+                      "100%": {
+                        transform: "translateY(0)",
+                      },
+                    },
+                    animation: selectedEggNr === egg.id ? "float 2s ease-in-out infinite" : "none",
+                    webkitFilter: selectedEggNr === egg.id ? "drop-shadow(12px 12px 7px rgba(255, 255, 255, 0.5))" : "",
+                    filter: selectedEggNr === egg.id ? "drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.5))" : "",
+                  }}
+                />
+              </Box>
             </Fade>
           );
         })}
       </Box>
-      <Text color={whiteColor} fontSize="3vh">
-        The first step on your way to your new pixel pet is to{" "}
-        <Text as="span" color={pinkColor} fontWeight={500}>
-          pick an egg
-        </Text>{" "}
-        you wish to care for. Choose wisely!
-      </Text>
-      <Box display="grid" gridTemplateColumns="1fr 1fr" columnGap="1em">
-        <CustomButton onButtonClick={onCancelGame} text="Cancel" backgroundColor={orangeColor} />
-        <CustomButton onButtonClick={setTimeoutOnTransition} text="Continue" isDisabled={selectedEggNr === null} />
+      <Box padding="4px">
+        <Text
+          p={6}
+          color="#2C130F"
+          fontSize="3vh"
+          background="#E5E0D7"
+          sx={{
+            boxShadow: `0 0 0 2px #E3DED6,
+                    0 0 0 2px #260e0b`,
+            border: "2px solid #c8b2a1",
+          }}
+        >
+          The first step on your way to your new pixel pet is to{" "}
+          <Text as="span" color={pinkColor} fontWeight={500}>
+            pick an egg
+          </Text>{" "}
+          you wish to care for. Choose wisely!
+        </Text>
+      </Box>
+      <Box display="grid" alignItems="end" gridTemplateColumns="1fr 1fr" columnGap="1em">
+        <CustomButton onClick={onCancelGame} backgroundColor={orangeColor}>
+          Cancel
+        </CustomButton>
+        <CustomButton onClick={setTimeoutOnTransition} isDisabled={selectedEggNr === null}>
+          Continue
+        </CustomButton>
       </Box>
     </Box>
   );

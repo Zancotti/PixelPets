@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 import { Egg } from "../components/SelectEgg";
 
 interface PixelPetsContextProps {
@@ -10,7 +10,7 @@ interface PixelPetsProviderProps {
   children: ReactNode;
 }
 
-const pixelPetsContext = createContext<PixelPetsContextProps | undefined>(undefined);
+export const PixelPetsContext = createContext<PixelPetsContextProps | undefined>(undefined);
 
 const PixelPetsProvider: React.FC<PixelPetsProviderProps> = ({ children }) => {
   const [selectedEgg, setSelectedEgg] = useState<Egg | null>(null);
@@ -20,15 +20,7 @@ const PixelPetsProvider: React.FC<PixelPetsProviderProps> = ({ children }) => {
     setSelectedEgg,
   };
 
-  return <pixelPetsContext.Provider value={contextValue}>{children}</pixelPetsContext.Provider>;
-};
-
-export const usePixelPetsContext = () => {
-  const context = useContext(pixelPetsContext);
-  if (!context) {
-    throw new Error("usePixelPetsContext must be used within a PixelPetsProvider");
-  }
-  return context;
+  return <PixelPetsContext.Provider value={contextValue}>{children}</PixelPetsContext.Provider>;
 };
 
 export default PixelPetsProvider;

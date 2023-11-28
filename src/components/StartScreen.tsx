@@ -64,7 +64,9 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
           </Link>
         </Text>
       </Fade>
-      <CustomButton onButtonClick={onStartGame} text="Start Game" margin="2em" />
+      <CustomButton onClick={onStartGame} margin="2em">
+        Start Game
+      </CustomButton>
     </Box>
   );
 };
