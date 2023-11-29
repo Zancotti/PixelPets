@@ -1,35 +1,16 @@
-import { Box, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
-import { keyframes } from "@emotion/react";
 import CustomButton from "./CustomButton";
 import PetNameModal from "./PetNameModal";
-
-const shakeAnimation = keyframes`
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
-`;
+import TextBox from "./TextBox";
+import ShakeEgg from "./ShakeEgg";
+import { capitalizeFirstLetter } from "../helpers/textHelper";
 
 const PetHome: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { selectedEgg } = usePixelPetsContext();
   const [clickCount, setClickCount] = useState(0);
   const [maxClicks, setMaxClicks] = useState(1);
   const [isVisible, setIsVisible] = useState(true);
-  const [shouldShake, setShouldShake] = useState(false);
   const [petName, setPetName] = useState("");
   const progress = (clickCount / maxClicks) * 100;
 
@@ -39,15 +20,11 @@ const PetHome: React.FC = () => {
   }, []);
 
   const clickEgg = () => {
-    setShouldShake(true);
     setClickCount((prevClickCount) => prevClickCount + 1);
 
     if (clickCount + 1 >= maxClicks) {
       setIsVisible(false);
     }
-    setTimeout(() => {
-      setShouldShake(false);
-    }, 500);
   };
 
   const getFeedbackText = (progress: number) => {
@@ -67,38 +44,35 @@ const PetHome: React.FC = () => {
   };
 
   return (
-    <Box h="100vh" display="flex" flexDirection="column" padding={10}>
+    <Box
+      h="100vh"
+      display="flex"
+      flexDirection="column"
+      padding={10}
+      sx={{
+        "@keyframes fadeIn": {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        animation: "fadeIn 1s ease-in-out forwards", // 1s duration, ease-in-out timing function
+      }}
+    >
       <Box display="flex" justifyContent="center" marginBottom="40px">
-        {isVisible && (
-          <Image
-            src={selectedEgg?.src}
-            onClick={() => clickEgg()}
-            sx={{
-              cursor: "pointer",
-              transition: "transform 0.3s ease-in-out",
-              animation: shouldShake ? `${shakeAnimation} 0.5s cubic-bezier(.36,.07,.19,.97) infinite` : "none",
-            }}
-          />
-        )}
+        {isVisible && <ShakeEgg clickEgg={clickEgg} />}
       </Box>
-      <Box padding="4px">
-        <Box
-          backgroundColor="#E5E0D7"
-          marginBottom={10}
-          padding={6}
-          sx={{
-            boxShadow: `0 0 0 2px #E3DED6,
-                    0 0 0 2px #260e0b`,
-            border: "2px solid #c8b2a1",
-          }}
-        >
-          <Text textAlign="center" color="#2C130F" fontSize="3vh">
-            {getFeedbackText(progress)}
-          </Text>
-        </Box>
-      </Box>
-      {clickCount === maxClicks && (
-        <CustomButton display="flex" children="Name your pet" onClick={() => setIsOpen(true)} />
+      {petName !== "" ? (
+        <TextBox
+          text={`Name locked in! ${capitalizeFirstLetter(
+            petName
+          )} is officially part of the family. ${petName} seems happy but hungry!`}
+        />
+      ) : (
+        <TextBox text={getFeedbackText(progress)} />
+      )}
+      {clickCount === maxClicks && petName === "" && (
+        <CustomButton display="flex" onClick={() => setIsOpen(true)}>
+          Name your pet
+        </CustomButton>
       )}
 
       <PetNameModal isOpen={isOpen} onClose={() => setIsOpen(false)} setPetName={setPetName} />
