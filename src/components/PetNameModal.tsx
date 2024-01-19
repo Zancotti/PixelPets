@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import CustomButton from "./CustomButton";
+import { capitalizeFirstLetter } from "../helpers/textHelper";
 
 interface PetNameModalProps {
   isOpen: boolean;
@@ -22,7 +23,7 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
   const inputRef = useRef<HTMLInputElement>(null); // Explicitly define the type
 
   const handleSubmit = () => {
-    setPetName(name);
+    setPetName(capitalizeFirstLetter(name));
     onClose();
   };
 

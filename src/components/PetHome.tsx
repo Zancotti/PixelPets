@@ -4,7 +4,6 @@ import CustomButton from "./CustomButton";
 import PetNameModal from "./PetNameModal";
 import TextBox from "./TextBox";
 import ShakeEgg from "./ShakeEgg";
-import { capitalizeFirstLetter } from "../helpers/textHelper";
 import FeedPetModal from "./FeedPetModal";
 
 const PetHome: React.FC = () => {
@@ -64,9 +63,7 @@ const PetHome: React.FC = () => {
       </Box>
       {petName !== "" ? (
         <TextBox
-          text={`Name locked in! ${capitalizeFirstLetter(
-            petName
-          )} is officially part of the family. ${petName} seems happy but hungry!`}
+          text={`Name locked in! ${petName} is officially part of the family. ${petName} seems happy but hungry!`}
         />
       ) : (
         <TextBox text={getFeedbackText(progress)} />
