@@ -1,7 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, BoxProps, Text } from "@chakra-ui/react";
 import React from "react";
 
-interface TextBoxProps {
+interface TextBoxProps extends BoxProps {
   text: string;
 }
 const TextBox: React.FC<TextBoxProps> = ({ text }) => {

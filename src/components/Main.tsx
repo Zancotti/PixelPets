@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import StartScreen from "./StartScreen";
 import SelectEgg from "./SelectEgg";
 import PetHome from "./PetHome";
-import { backgroundColor } from "../colors";
+import { backgroundColor, orangeColor } from "../colors";
 
 type gameView = "startScreen" | "selectEgg" | "petHome";
 
@@ -15,12 +15,22 @@ const Main: React.FC = () => {
   };
 
   return (
-    <Box backgroundColor={backgroundColor}>
-      {gameView === "startScreen" && <StartScreen onStartGame={() => onNavigateTo("selectEgg")} />}
-      {gameView === "selectEgg" && (
-        <SelectEgg onCancelGame={() => onNavigateTo("startScreen")} onContinue={() => onNavigateTo("petHome")} />
-      )}
-      {gameView === "petHome" && <PetHome />}
+    <Box backgroundColor={backgroundColor} h={"100vh"} display="flex" alignItems="center" justifyContent="center">
+      <Box
+        width={{
+          sm: `375px`,
+        }}
+        height={{ sm: "675px", base: "100%" }}
+        border={{
+          sm: `1px solid ${orangeColor}`,
+        }}
+      >
+        {gameView === "startScreen" && <StartScreen onStartGame={() => onNavigateTo("selectEgg")} />}
+        {gameView === "selectEgg" && (
+          <SelectEgg onCancelGame={() => onNavigateTo("startScreen")} onContinue={() => onNavigateTo("petHome")} />
+        )}
+        {gameView === "petHome" && <PetHome />}
+      </Box>
     </Box>
   );
 };

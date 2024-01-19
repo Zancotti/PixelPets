@@ -38,7 +38,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: "100%",
         display: "grid",
         gridTemplateRows: "auto auto auto 1fr auto",
       }}
@@ -47,17 +47,17 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
         <Img src="./pictures/pixelPetsBackground.webp" sx={{ width: "100%" }} />
       </Fade>
       <Fade in={fadeInText1} transition={{ enter: { duration: 0.5 } }}>
-        <Text fontSize="5vh" fontWeight={700} color={whiteColor} textAlign="center">
+        <Text fontSize="2.5em" fontWeight={700} color={whiteColor} textAlign="center">
           Adopt your
         </Text>
       </Fade>
       <Fade in={fadeInText2} transition={{ enter: { duration: 0.5 } }}>
-        <Text fontSize="5vh" fontWeight={700} color={whiteColor} textAlign="center">
+        <Text fontSize="2.5em" fontWeight={700} color={whiteColor} textAlign="center">
           pixel pet today!
         </Text>
       </Fade>
       <Fade in={fadeInText3} transition={{ enter: { duration: 0.5 } }}>
-        <Text fontSize="2.3vh" sx={{ marginTop: "1em" }} color={whiteColor} textAlign="center">
+        <Text fontSize="1em" sx={{ marginTop: "1em" }} color={whiteColor} textAlign="center">
           A game by{" "}
           <Link color={orangeColor} rel="noopener noreferrer" isExternal href="https://github.com/Zancotti">
             Sabrina Zancotti

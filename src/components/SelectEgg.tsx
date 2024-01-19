@@ -60,11 +60,11 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
 
   return (
     <Box
-      h="100vh"
       display="grid"
       gridTemplateRows="auto auto auto 1fr"
       rowGap="2em"
       padding="2em"
+      h={"100%"}
       sx={{
         "@keyframes fadeOut": {
           from: { opacity: 1 },

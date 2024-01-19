@@ -5,9 +5,11 @@ import PetNameModal from "./PetNameModal";
 import TextBox from "./TextBox";
 import ShakeEgg from "./ShakeEgg";
 import { capitalizeFirstLetter } from "../helpers/textHelper";
+import FeedPetModal from "./FeedPetModal";
 
 const PetHome: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPetNameModalOpen, setIsPetNameModalOpen] = useState(false);
+  const [isFeedPetModalOpen, setIsFeedPetModalOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [maxClicks, setMaxClicks] = useState(1);
   const [isVisible, setIsVisible] = useState(true);
@@ -45,9 +47,9 @@ const PetHome: React.FC = () => {
 
   return (
     <Box
-      h="100vh"
-      display="flex"
-      flexDirection="column"
+      display="grid"
+      height="100%"
+      gridTemplateRows={"auto 1fr auto"}
       padding={10}
       sx={{
         "@keyframes fadeIn": {
@@ -70,12 +72,19 @@ const PetHome: React.FC = () => {
         <TextBox text={getFeedbackText(progress)} />
       )}
       {clickCount === maxClicks && petName === "" && (
-        <CustomButton display="flex" onClick={() => setIsOpen(true)}>
+        <CustomButton display="flex" onClick={() => setIsPetNameModalOpen(true)}>
           Name your pet
         </CustomButton>
       )}
 
-      <PetNameModal isOpen={isOpen} onClose={() => setIsOpen(false)} setPetName={setPetName} />
+      {petName !== "" && (
+        <CustomButton display="flex" onClick={() => setIsFeedPetModalOpen(true)}>
+          Order food
+        </CustomButton>
+      )}
+
+      <PetNameModal isOpen={isPetNameModalOpen} onClose={() => setIsPetNameModalOpen(false)} setPetName={setPetName} />
+      <FeedPetModal isOpen={isFeedPetModalOpen} onClose={() => setIsFeedPetModalOpen(false)} />
     </Box>
   );
 };
