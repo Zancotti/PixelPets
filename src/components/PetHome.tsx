@@ -5,6 +5,8 @@ import PetNameModal from "./PetNameModal";
 import TextBox from "./TextBox";
 import ShakeEgg from "./ShakeEgg";
 import FeedPetModal from "./FeedPetModal";
+import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
+import { doesPetLikeFood } from "../helpers/textHelper";
 
 const PetHome: React.FC = () => {
   const [isPetNameModalOpen, setIsPetNameModalOpen] = useState(false);
@@ -14,6 +16,7 @@ const PetHome: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [petName, setPetName] = useState("");
   const progress = (clickCount / maxClicks) * 100;
+  const { selectedEgg, selectedPetFood } = usePixelPetsContext();
 
   useEffect(() => {
     // Generate a random number between 5 and 20 for maxClicks
@@ -44,6 +47,21 @@ const PetHome: React.FC = () => {
     }
   };
 
+  const getFoodFeedbackText = () => {
+    if (petName !== "" && selectedPetFood === "") {
+      return `Name locked in! ${petName} is officially part of the family. ${petName} seems happy but hungry!`;
+    } else if (selectedPetFood !== "") {
+      if (selectedEgg) {
+        if (doesPetLikeFood(selectedEgg?.type, selectedPetFood)) {
+          return `${petName} loved the food! Well done!`;
+        } else {
+          return `Oh no, ${petName} didn't enjoy the food. Try again!`;
+        }
+      }
+    }
+    return "";
+  };
+
   return (
     <Box
       display="grid"
@@ -61,13 +79,7 @@ const PetHome: React.FC = () => {
       <Box display="flex" justifyContent="center" marginBottom="40px">
         {isVisible && <ShakeEgg clickEgg={clickEgg} />}
       </Box>
-      {petName !== "" ? (
-        <TextBox
-          text={`Name locked in! ${petName} is officially part of the family. ${petName} seems happy but hungry!`}
-        />
-      ) : (
-        <TextBox text={getFeedbackText(progress)} />
-      )}
+      {petName !== "" ? <TextBox text={getFoodFeedbackText()} /> : <TextBox text={getFeedbackText(progress)} />}
       {clickCount === maxClicks && petName === "" && (
         <CustomButton display="flex" onClick={() => setIsPetNameModalOpen(true)}>
           Name your pet

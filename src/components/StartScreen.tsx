@@ -59,12 +59,18 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
       <Fade in={fadeInText3} transition={{ enter: { duration: 0.5 } }}>
         <Text fontSize="1em" sx={{ marginTop: "1em" }} color={whiteColor} textAlign="center">
           A game by{" "}
-          <Link color={orangeColor} rel="noopener noreferrer" isExternal href="https://github.com/Zancotti">
+          <Link
+            color={orangeColor}
+            rel="noopener noreferrer"
+            isExternal
+            href="https://github.com/Zancotti"
+            aria-label="Visit Sabrina Zancotti's GitHub profile"
+          >
             Sabrina Zancotti
           </Link>
         </Text>
       </Fade>
-      <CustomButton onClick={onStartGame} margin="2em">
+      <CustomButton onClick={onStartGame} margin="2em" aria-label="Start Game">
         Start Game
       </CustomButton>
     </Box>

@@ -20,7 +20,7 @@ interface PetNameModalProps {
 
 const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName }) => {
   const [name, setName] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null); // Explicitly define the type
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
     setPetName(capitalizeFirstLetter(name));
@@ -29,7 +29,6 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
 
   useEffect(() => {
     // Focus on the input when the modal is opened
-    console.log(inputRef.current);
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
     }
@@ -45,8 +44,8 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose} closeOnOverlayClick closeOnEsc autoFocus>
       <ModalOverlay />
-      <ModalContent m={5}>
-        <ModalHeader>Name your pet</ModalHeader>
+      <ModalContent m={5} width={"325px"} aria-labelledby="pet-name-modal">
+        <ModalHeader id="pet-name-modal">Name your pet</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
@@ -56,6 +55,7 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
             value={name}
             onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
+            size="md"
           ></Input>
         </ModalBody>
 
@@ -63,7 +63,9 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
           <CustomButton m={3} onClick={onClose}>
             Cancel
           </CustomButton>
-          <CustomButton onClick={handleSubmit}>Submit</CustomButton>
+          <CustomButton isDisabled={name === ""} onClick={handleSubmit}>
+            Submit
+          </CustomButton>
         </ModalFooter>
       </ModalContent>
     </Modal>

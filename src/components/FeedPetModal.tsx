@@ -1,5 +1,6 @@
+import React, { useState } from "react";
 import {
-  Input,
+  Select,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -8,10 +9,8 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
 import CustomButton from "./CustomButton";
-import FoodItemRow from "./FoodItemRow";
-import { capitalizeFirstLetter } from "../helpers/textHelper";
+import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
 
 interface FeedPetModalProps {
   isOpen: boolean;
@@ -19,37 +18,52 @@ interface FeedPetModalProps {
 }
 
 const FeedPetModal: React.FC<FeedPetModalProps> = ({ isOpen, onClose }) => {
-  const handleSubmit = () => {};
-  const [petFood, setPetFood] = useState("");
+  const { setSelectedPetFood } = usePixelPetsContext();
+  const [food, setFood] = useState("");
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLSelectElement>) => {
     // Submit on Enter key press
-    if (event.key === "Enter") {
+    if (e.key === "Enter" && food !== "") {
       handleSubmit();
     }
   };
 
+  const handleSubmit = () => {
+    setSelectedPetFood(food);
+    onClose();
+  };
+
   return (
-    <Modal isCentered isOpen={isOpen} onClose={onClose}>
+    <Modal isCentered isOpen={isOpen} onClose={onClose} closeOnOverlayClick closeOnEsc autoFocus>
       <ModalOverlay />
-      <ModalContent m={5}>
-        <ModalHeader>Pixel Pet Palace</ModalHeader>
+      <ModalContent m={5} width={"325px"} display={"flex"} alignItems={"center"} aria-labelledby="pet-food-modal">
+        <ModalHeader id="pet-food-modal">Pixel Pet Palace</ModalHeader>
         <ModalCloseButton />
-        <FoodItemRow w={""} text="oklart" />
         <ModalBody>
-          <Input
-            variant="outline"
-            placeholder="Pet Name"
-            value={petFood}
-            onChange={(e) => setPetFood(capitalizeFirstLetter(e.target.value))}
+          <Select
+            placeholder="Select Pet Food"
+            value={food}
+            onChange={(e) => setFood(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
-          ></Input>
+          >
+            <option value="option1">Gourmet Salmon</option>
+            <option value="option2">Velvety Sweet Potato Mash</option>
+            <option value="option3">Olive Oil Elixir</option>
+            <option value="option4">Fresh Parsley Garnish</option>
+            <option value="option5">Eggstra Special Addition</option>
+            <option value="option6">Salmon Delights</option>
+            <option value="option7">Sweet Potato Bliss</option>
+            <option value="option8">Aquatic Greenery Extravaganza</option>
+            <option value="option9">Nutrient-Rich Pellet Surprise</option>
+          </Select>
         </ModalBody>
         <ModalFooter>
           <CustomButton m={3} onClick={onClose}>
             Cancel
           </CustomButton>
-          <CustomButton onClick={handleSubmit}>Submit</CustomButton>
+          <CustomButton onClick={handleSubmit} isDisabled={food === ""}>
+            Submit
+          </CustomButton>
         </ModalFooter>
       </ModalContent>
     </Modal>

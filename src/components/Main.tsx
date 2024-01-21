@@ -5,12 +5,12 @@ import SelectEgg from "./SelectEgg";
 import PetHome from "./PetHome";
 import { backgroundColor, orangeColor } from "../colors";
 
-type gameView = "startScreen" | "selectEgg" | "petHome";
+type GameView = "startScreen" | "selectEgg" | "petHome";
 
 const Main: React.FC = () => {
-  const [gameView, setGameView] = useState<gameView>("startScreen");
+  const [gameView, setGameView] = useState<GameView>("startScreen");
 
-  const onNavigateTo = (view: gameView) => {
+  const onNavigateTo = (view: GameView) => {
     setGameView(view);
   };
 

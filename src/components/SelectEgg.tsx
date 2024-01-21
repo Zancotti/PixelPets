@@ -3,6 +3,7 @@ import { Box, Fade, Text, Image } from "@chakra-ui/react";
 import CustomButton from "./CustomButton";
 import { orangeColor, pinkColor, whiteColor } from "../colors";
 import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
+import { pixelPet } from "../helpers/textHelper";
 
 interface SelectEggProps {
   onCancelGame: () => void;
@@ -13,6 +14,7 @@ export interface Egg {
   src: string;
   id: number;
   fadeIn: boolean;
+  type: pixelPet;
 }
 
 const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
@@ -24,9 +26,9 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
   const { setSelectedEgg } = usePixelPetsContext();
 
   const eggs: Egg[] = [
-    { src: "./pictures/egg.webp", id: 1, fadeIn: fadeInEgg1 },
-    { src: "./pictures/egg.webp", id: 2, fadeIn: fadeInEgg2 },
-    { src: "./pictures/egg.webp", id: 3, fadeIn: fadeInEgg3 },
+    { src: "./pictures/egg.webp", id: 1, fadeIn: fadeInEgg1, type: "cat" },
+    { src: "./pictures/egg.webp", id: 2, fadeIn: fadeInEgg2, type: "dog" },
+    { src: "./pictures/egg.webp", id: 3, fadeIn: fadeInEgg3, type: "turtle" },
   ];
 
   useEffect(() => {
@@ -82,25 +84,31 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
             <Fade key={egg.id} in={egg.fadeIn} transition={{ enter: { duration: 0.5 } }}>
               <Box display="flex" justifyContent="center">
                 <Image
+                  alt="Image of a pixel pet egg"
+                  cursor={"pointer"}
                   onClick={() => setSelectedEggNr(egg.id)}
                   h="100px"
                   src={egg.src}
-                  className={selectedEggNr === egg.id ? "floating" : ""}
+                  className={selectedEggNr === egg.id ? "floating" : undefined}
                   sx={{
                     "@keyframes float": {
                       "0%": {
                         transform: "translateY(0)",
+                        WebkitTransform: "translateY(0)",
                       },
                       "50%": {
                         transform: "translateY(-10px)",
+                        WebkitTransform: "translateY(-10px)",
                       },
                       "100%": {
                         transform: "translateY(0)",
+                        WebkitTransform: "translateY(0)",
                       },
                     },
                     animation: selectedEggNr === egg.id ? "float 2s ease-in-out infinite" : "none",
-                    webkitFilter: selectedEggNr === egg.id ? "drop-shadow(12px 12px 7px rgba(255, 255, 255, 0.5))" : "",
-                    filter: selectedEggNr === egg.id ? "drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.5))" : "",
+                    WebkitFilter:
+                      selectedEggNr === egg.id ? "drop-shadow(12px 12px 7px rgba(255, 255, 255, 0.5))" : undefined,
+                    filter: selectedEggNr === egg.id ? "drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.5))" : undefined,
                   }}
                 />
               </Box>
@@ -116,6 +124,8 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
           background="#E5E0D7"
           sx={{
             boxShadow: `0 0 0 2px #E3DED6,
+                    0 0 0 2px #260e0b`,
+            WebkitBoxShadow: `0 0 0 2px #E3DED6,
                     0 0 0 2px #260e0b`,
             border: "2px solid #c8b2a1",
           }}

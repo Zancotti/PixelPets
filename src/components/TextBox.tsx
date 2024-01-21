@@ -14,6 +14,8 @@ const TextBox: React.FC<TextBoxProps> = ({ text }) => {
         sx={{
           boxShadow: `0 0 0 2px #E3DED6,
                     0 0 0 2px #260e0b`,
+          WebkitBoxShadow: `0 0 0 2px #E3DED6,
+                    0 0 0 2px #260e0b`,
           border: "2px solid #c8b2a1",
         }}
       >
