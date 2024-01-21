@@ -1,18 +1,19 @@
 import { Image } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import React, { useState } from "react";
-import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
 
-interface ShakeEggProps {
-  clickEgg: () => void;
+interface ShakePictureProps {
+  clickPicture?: () => void;
+  pictureSrc: string;
 }
-const ShakeEgg: React.FC<ShakeEggProps> = ({ clickEgg }) => {
-  const { selectedEgg } = usePixelPetsContext();
+const ShakePicture: React.FC<ShakePictureProps> = ({ clickPicture, pictureSrc }) => {
   const [shouldShake, setShouldShake] = useState(false);
 
-  const clickShakeEgg = () => {
+  const clickShakePicture = () => {
     setShouldShake(true);
-    clickEgg();
+    if (clickPicture) {
+      clickPicture();
+    }
     setTimeout(() => {
       setShouldShake(false);
     }, 500);
@@ -20,9 +21,11 @@ const ShakeEgg: React.FC<ShakeEggProps> = ({ clickEgg }) => {
 
   return (
     <Image
-      src={selectedEgg?.src}
-      onClick={() => clickShakeEgg()}
+      src={pictureSrc}
+      onClick={() => clickShakePicture()}
       sx={{
+        height: "201px",
+        width: "150px",
         cursor: "pointer",
         transition: "transform 0.3s ease-in-out",
         animation: shouldShake ? `${shakeAnimation} 0.5s cubic-bezier(.36,.07,.19,.97) infinite` : "none",
@@ -31,7 +34,7 @@ const ShakeEgg: React.FC<ShakeEggProps> = ({ clickEgg }) => {
   );
 };
 
-const shakeAnimation = keyframes`
+export const shakeAnimation = keyframes`
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
     WebkitTransform: translate3d(-1px, 0, 0);
@@ -54,4 +57,4 @@ const shakeAnimation = keyframes`
   }
 `;
 
-export default ShakeEgg;
+export default ShakePicture;

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import CustomButton from "./CustomButton";
 import PetNameModal from "./PetNameModal";
 import TextBox from "./TextBox";
-import ShakeEgg from "./ShakeEgg";
 import FeedPetModal from "./FeedPetModal";
 import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
 import { doesPetLikeFood } from "../helpers/textHelper";
+import ShakePicture from "./ShakePicture";
 
 const PetHome: React.FC = () => {
   const [isPetNameModalOpen, setIsPetNameModalOpen] = useState(false);
@@ -77,8 +77,10 @@ const PetHome: React.FC = () => {
       }}
     >
       <Box display="flex" justifyContent="center" marginBottom="40px">
-        {isVisible && <ShakeEgg clickEgg={clickEgg} />}
+        {isVisible && selectedEgg && <ShakePicture clickPicture={clickEgg} pictureSrc={selectedEgg?.eggSrc} />}
+        {!isVisible && selectedEgg && <ShakePicture pictureSrc={selectedEgg?.petSrc} />}
       </Box>
+
       {petName !== "" ? <TextBox text={getFoodFeedbackText()} /> : <TextBox text={getFeedbackText(progress)} />}
       {clickCount === maxClicks && petName === "" && (
         <CustomButton display="flex" onClick={() => setIsPetNameModalOpen(true)}>

@@ -11,10 +11,11 @@ interface SelectEggProps {
 }
 
 export interface Egg {
-  src: string;
+  eggSrc: string;
   id: number;
   fadeIn: boolean;
   type: pixelPet;
+  petSrc: string;
 }
 
 const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
@@ -26,9 +27,27 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
   const { setSelectedEgg } = usePixelPetsContext();
 
   const eggs: Egg[] = [
-    { src: "./pictures/egg.webp", id: 1, fadeIn: fadeInEgg1, type: "cat" },
-    { src: "./pictures/egg.webp", id: 2, fadeIn: fadeInEgg2, type: "dog" },
-    { src: "./pictures/egg.webp", id: 3, fadeIn: fadeInEgg3, type: "turtle" },
+    {
+      eggSrc: "./pictures/egg.webp",
+      id: 1,
+      fadeIn: fadeInEgg1,
+      type: "cat",
+      petSrc: "./pictures/hatchingBackground.webp",
+    },
+    {
+      eggSrc: "./pictures/egg.webp",
+      id: 2,
+      fadeIn: fadeInEgg2,
+      type: "dog",
+      petSrc: "./pictures/hatchingBackground.webp",
+    },
+    {
+      eggSrc: "./pictures/egg.webp",
+      id: 3,
+      fadeIn: fadeInEgg3,
+      type: "turtle",
+      petSrc: "./pictures/hatchingBackground.webp",
+    },
   ];
 
   useEffect(() => {
@@ -88,7 +107,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
                   cursor={"pointer"}
                   onClick={() => setSelectedEggNr(egg.id)}
                   h="100px"
-                  src={egg.src}
+                  src={egg.eggSrc}
                   className={selectedEggNr === egg.id ? "floating" : undefined}
                   sx={{
                     "@keyframes float": {

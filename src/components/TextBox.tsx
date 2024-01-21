@@ -19,7 +19,7 @@ const TextBox: React.FC<TextBoxProps> = ({ text }) => {
           border: "2px solid #c8b2a1",
         }}
       >
-        <Text textAlign="center" color="#2C130F" fontSize="3vh">
+        <Text textAlign="center" color="#2C130F" fontSize="2.5vh">
           {text}{" "}
         </Text>
       </Box>
