@@ -1,4 +1,4 @@
-import { Box, BoxProps, Text } from "@chakra-ui/react";
+import { Box, BoxProps, Center, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface TextBoxProps extends BoxProps {
@@ -11,6 +11,7 @@ const TextBox: React.FC<TextBoxProps> = ({ text }) => {
         backgroundColor="#E5E0D7"
         marginBottom={10}
         padding={6}
+        textAlign="center"
         sx={{
           boxShadow: `0 0 0 2px #E3DED6,
                     0 0 0 2px #260e0b`,
@@ -19,7 +20,7 @@ const TextBox: React.FC<TextBoxProps> = ({ text }) => {
           border: "2px solid #c8b2a1",
         }}
       >
-        <Text textAlign="center" color="#2C130F" fontSize="2.5vh">
+        <Text color="#2C130F" fontSize="1.5em">
           {text}{" "}
         </Text>
       </Box>

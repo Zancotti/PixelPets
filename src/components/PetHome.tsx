@@ -57,7 +57,7 @@ const PetHome: React.FC<PetHomeProps> = ({ onRestartGame }) => {
   return (
     <Box
       display="grid"
-      height="100dvh"
+      height={{ base: "100dvh", sm: "100%" }}
       gridTemplateRows={"auto 1fr auto"}
       padding={10}
       sx={{

@@ -36,13 +36,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        height: "100dvh",
-        display: "grid",
-        gridTemplateRows: "auto auto auto 1fr auto",
-      }}
-    >
+    <Box height={{ base: "100dvh", sm: "100%" }} display="grid" gridTemplateRows="auto auto auto 1fr auto">
       <Fade in={fadeInPicture} transition={{ enter: { duration: 1 } }}>
         <Img src="./pictures/pixelPetsBackground.webp" sx={{ width: "100%" }} />
       </Fade>

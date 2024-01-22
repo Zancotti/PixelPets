@@ -97,7 +97,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       gridTemplateRows="auto auto auto 1fr"
       rowGap="2em"
       padding="2em"
-      h={"100dvh"}
+      height={{ base: "100dvh", sm: "100%" }}
       sx={{
         "@keyframes fadeOut": {
           from: { opacity: 1 },
@@ -106,7 +106,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
         animation: fadeContent ? "fadeOut 1s ease-in-out forwards" : "", // 1s duration, ease-in-out timing function
       }}
     >
-      <Text color={whiteColor} fontSize="4vh" textAlign="center" fontWeight={700}>
+      <Text color={whiteColor} fontSize="2em" textAlign="center" fontWeight={700}>
         Select your egg
       </Text>
       <Box display="grid" gridTemplateColumns="1fr 1fr 1fr" justifyContent="center" columnGap="1em">
@@ -151,13 +151,13 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
         <Text
           p={6}
           color="#2C130F"
-          fontSize="3vh"
+          fontSize="1.5em"
           background="#E5E0D7"
           sx={{
             boxShadow: `0 0 0 2px #E3DED6,
                     0 0 0 2px #260e0b`,
             WebkitBoxShadow: `0 0 0 2px #E3DED6,
-                    0 0 0 2px #260e0b`,
+                    0 0 0 2px   #260e0b`,
             border: "2px solid #c8b2a1",
           }}
         >
