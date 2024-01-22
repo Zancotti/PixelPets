@@ -34,7 +34,7 @@ const ShakePicture: React.FC<ShakePictureProps> = ({ clickPicture, pictureSrc })
   );
 };
 
-export const shakeAnimation = keyframes`
+const shakeAnimation = keyframes`
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
     WebkitTransform: translate3d(-1px, 0, 0);

@@ -15,7 +15,7 @@ export interface Egg {
   id: number;
   fadeIn: boolean;
   type: pixelPet;
-  petSrc: string;
+  petSrc: { happy: string; sad: string; neutral: string };
 }
 
 const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
@@ -32,21 +32,33 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       id: 1,
       fadeIn: fadeInEgg1,
       type: "cat",
-      petSrc: "./pictures/hatchingBackground.webp",
+      petSrc: {
+        happy: "./pictures/cat_happy.webp",
+        sad: "./pictures/cat_sad.webp",
+        neutral: "./pictures/cat_neutral.webp",
+      },
     },
     {
       eggSrc: "./pictures/egg.webp",
       id: 2,
       fadeIn: fadeInEgg2,
       type: "dog",
-      petSrc: "./pictures/hatchingBackground.webp",
+      petSrc: {
+        happy: "./pictures/cat_happy.webp",
+        sad: "./pictures/cat_sad.webp",
+        neutral: "./pictures/cat_neutral.webp",
+      },
     },
     {
       eggSrc: "./pictures/egg.webp",
       id: 3,
       fadeIn: fadeInEgg3,
       type: "turtle",
-      petSrc: "./pictures/hatchingBackground.webp",
+      petSrc: {
+        happy: "./pictures/cat_happy.webp",
+        sad: "./pictures/cat_sad.webp",
+        neutral: "./pictures/cat_neutral.webp",
+      },
     },
   ];
 

@@ -5,15 +5,19 @@ import PetNameModal from "./PetNameModal";
 import TextBox from "./TextBox";
 import FeedPetModal from "./FeedPetModal";
 import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
-import { doesPetLikeFood } from "../helpers/textHelper";
+import { doesPetLikeFood, getFeedbackText, getFoodFeedbackText } from "../helpers/textHelper";
 import ShakePicture from "./ShakePicture";
 
-const PetHome: React.FC = () => {
+interface PetHomeProps {
+  onRestartGame: () => void;
+}
+
+const PetHome: React.FC<PetHomeProps> = ({ onRestartGame }) => {
   const [isPetNameModalOpen, setIsPetNameModalOpen] = useState(false);
   const [isFeedPetModalOpen, setIsFeedPetModalOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [maxClicks, setMaxClicks] = useState(1);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isEggVisible, setIsEggVisible] = useState(true);
   const [petName, setPetName] = useState("");
   const progress = (clickCount / maxClicks) * 100;
   const { selectedEgg, selectedPetFood } = usePixelPetsContext();
@@ -27,39 +31,26 @@ const PetHome: React.FC = () => {
     setClickCount((prevClickCount) => prevClickCount + 1);
 
     if (clickCount + 1 >= maxClicks) {
-      setIsVisible(false);
+      setIsEggVisible(false);
     }
   };
 
-  const getFeedbackText = (progress: number) => {
-    if (progress === 0) {
-      return "Your pixel pet is ready to hatch! Tap the egg to give it a helping hand.";
-    } else if (progress < 25) {
-      return "Keep going! Each click brings your pet closer to seeing the world.";
-    } else if (progress < 50) {
-      return "You're doing great! Your pet's almost ready to hatch.";
-    } else if (progress < 75) {
-      return "Almost there! Your pet is about to hatch, keep clicking!";
-    } else if (progress < 100) {
-      return "This is it! With a few more clicks, your pixel pet will hatch into the world!";
-    } else {
-      return "Welcome to the world, little one! Your journey together begins now.";
+  const renderShakePicture = () => {
+    if (isEggVisible && selectedEgg) {
+      return <ShakePicture clickPicture={clickEgg} pictureSrc={selectedEgg?.eggSrc} />;
     }
-  };
 
-  const getFoodFeedbackText = () => {
-    if (petName !== "" && selectedPetFood === "") {
-      return `Name locked in! ${petName} is officially part of the family. ${petName} seems happy but hungry!`;
-    } else if (selectedPetFood !== "") {
-      if (selectedEgg) {
-        if (doesPetLikeFood(selectedEgg?.type, selectedPetFood)) {
-          return `${petName} loved the food! Well done!`;
-        } else {
-          return `Oh no, ${petName} didn't enjoy the food. Try again!`;
-        }
+    if (!isEggVisible && selectedEgg) {
+      if (!selectedPetFood) {
+        return <ShakePicture pictureSrc={selectedEgg?.petSrc.neutral} />;
+      } else if (selectedPetFood && doesPetLikeFood(selectedEgg.type, selectedPetFood)) {
+        return <ShakePicture pictureSrc={selectedEgg?.petSrc.happy} />;
+      } else if (selectedPetFood && !doesPetLikeFood(selectedEgg.type, selectedPetFood)) {
+        return <ShakePicture pictureSrc={selectedEgg?.petSrc.sad} />;
       }
     }
-    return "";
+
+    return null;
   };
 
   return (
@@ -77,11 +68,15 @@ const PetHome: React.FC = () => {
       }}
     >
       <Box display="flex" justifyContent="center" marginBottom="40px">
-        {isVisible && selectedEgg && <ShakePicture clickPicture={clickEgg} pictureSrc={selectedEgg?.eggSrc} />}
-        {!isVisible && selectedEgg && <ShakePicture pictureSrc={selectedEgg?.petSrc} />}
+        {renderShakePicture()}
       </Box>
 
-      {petName !== "" ? <TextBox text={getFoodFeedbackText()} /> : <TextBox text={getFeedbackText(progress)} />}
+      {petName !== "" ? (
+        <TextBox text={getFoodFeedbackText(petName, selectedEgg, selectedPetFood)} />
+      ) : (
+        <TextBox text={getFeedbackText(progress)} />
+      )}
+
       {clickCount === maxClicks && petName === "" && (
         <CustomButton display="flex" onClick={() => setIsPetNameModalOpen(true)}>
           Name your pet
@@ -93,6 +88,10 @@ const PetHome: React.FC = () => {
           Order food
         </CustomButton>
       )}
+
+      <CustomButton marginTop="0.5em" display="flex" onClick={() => onRestartGame()}>
+        Restart Game
+      </CustomButton>
 
       <PetNameModal isOpen={isPetNameModalOpen} onClose={() => setIsPetNameModalOpen(false)} setPetName={setPetName} />
       <FeedPetModal isOpen={isFeedPetModalOpen} onClose={() => setIsFeedPetModalOpen(false)} />

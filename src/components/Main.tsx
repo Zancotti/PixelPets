@@ -29,7 +29,7 @@ const Main: React.FC = () => {
         {gameView === "selectEgg" && (
           <SelectEgg onCancelGame={() => onNavigateTo("startScreen")} onContinue={() => onNavigateTo("petHome")} />
         )}
-        {gameView === "petHome" && <PetHome />}
+        {gameView === "petHome" && <PetHome onRestartGame={() => onNavigateTo("startScreen")} />}
       </Box>
     </Box>
   );
