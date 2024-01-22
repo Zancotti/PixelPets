@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import CustomButton from "./CustomButton";
 import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
+import { orangeColor } from "../colors";
 
 interface FeedPetModalProps {
   isOpen: boolean;
@@ -36,7 +37,7 @@ const FeedPetModal: React.FC<FeedPetModalProps> = ({ isOpen, onClose }) => {
   return (
     <Modal isCentered isOpen={isOpen} onClose={onClose} closeOnOverlayClick closeOnEsc autoFocus>
       <ModalOverlay />
-      <ModalContent m={5} width={"325px"} display={"flex"} alignItems={"center"} aria-labelledby="pet-food-modal">
+      <ModalContent m={5} width={"325px"} aria-labelledby="pet-food-modal">
         <ModalHeader id="pet-food-modal">Pixel Pet Palace</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -58,10 +59,10 @@ const FeedPetModal: React.FC<FeedPetModalProps> = ({ isOpen, onClose }) => {
           </Select>
         </ModalBody>
         <ModalFooter>
-          <CustomButton m={3} onClick={onClose}>
+          <CustomButton flex="1" mr={3} onClick={onClose} backgroundColor={orangeColor}>
             Cancel
           </CustomButton>
-          <CustomButton onClick={handleSubmit} isDisabled={food === ""}>
+          <CustomButton flex="1" onClick={handleSubmit} isDisabled={food === ""}>
             Submit
           </CustomButton>
         </ModalFooter>

@@ -11,6 +11,7 @@ import {
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import CustomButton from "./CustomButton";
 import { capitalizeFirstLetter } from "../helpers/textHelper";
+import { orangeColor } from "../colors";
 
 interface PetNameModalProps {
   isOpen: boolean;
@@ -61,10 +62,10 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
         </ModalBody>
 
         <ModalFooter>
-          <CustomButton m={3} onClick={onClose}>
+          <CustomButton flex="1" mr={3} onClick={onClose} backgroundColor={orangeColor}>
             Cancel
           </CustomButton>
-          <CustomButton isDisabled={name === ""} onClick={handleSubmit}>
+          <CustomButton flex="1" isDisabled={name === ""} onClick={handleSubmit}>
             Submit
           </CustomButton>
         </ModalFooter>
