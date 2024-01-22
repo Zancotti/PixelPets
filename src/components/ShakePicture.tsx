@@ -24,7 +24,7 @@ const ShakePicture: React.FC<ShakePictureProps> = ({ clickPicture, pictureSrc })
       src={pictureSrc}
       onClick={() => clickShakePicture()}
       sx={{
-        height: "201px",
+        height: "200px",
         width: "150px",
         cursor: "pointer",
         transition: "transform 0.3s ease-in-out",

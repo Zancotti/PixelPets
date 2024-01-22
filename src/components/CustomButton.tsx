@@ -6,7 +6,7 @@ const CustomButton: React.FC<ButtonProps> = ({ children, backgroundColor, ...pro
   return (
     <Button
       backgroundColor={backgroundColor ?? lightBlueColor}
-      _hover={{ backgroundColor: lightBlueColor }}
+      _hover={{ backgroundColor: backgroundColor ?? lightBlueColor }}
       color={whiteColor}
       fontWeight={700}
       {...props}

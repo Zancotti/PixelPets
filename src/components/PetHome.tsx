@@ -7,6 +7,7 @@ import FeedPetModal from "./FeedPetModal";
 import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
 import { doesPetLikeFood, getFeedbackText, getFoodFeedbackText } from "../helpers/textHelper";
 import ShakePicture from "./ShakePicture";
+import { orangeColor } from "../colors";
 
 interface PetHomeProps {
   onRestartGame: () => void;
@@ -56,7 +57,7 @@ const PetHome: React.FC<PetHomeProps> = ({ onRestartGame }) => {
   return (
     <Box
       display="grid"
-      height="100%"
+      height="100vh"
       gridTemplateRows={"auto 1fr auto"}
       padding={10}
       sx={{
@@ -89,7 +90,7 @@ const PetHome: React.FC<PetHomeProps> = ({ onRestartGame }) => {
         </CustomButton>
       )}
 
-      <CustomButton marginTop="0.5em" display="flex" onClick={() => onRestartGame()}>
+      <CustomButton marginTop="0.5em" display="flex" backgroundColor={orangeColor} onClick={() => onRestartGame()}>
         Restart Game
       </CustomButton>
 
