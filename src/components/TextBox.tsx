@@ -1,4 +1,4 @@
-import { Box, BoxProps, Center, Text } from "@chakra-ui/react";
+import { Box, BoxProps, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface TextBoxProps extends BoxProps {

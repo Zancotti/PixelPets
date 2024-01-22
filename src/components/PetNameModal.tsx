@@ -49,7 +49,7 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
         <ModalCloseButton />
         <ModalBody>
           <Input
-            maxLength={15}
+            maxLength={10}
             ref={inputRef}
             variant="outline"
             placeholder="Pet Name"
