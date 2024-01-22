@@ -97,7 +97,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       gridTemplateRows="auto auto auto 1fr"
       rowGap="2em"
       padding="2em"
-      h={"100%"}
+      h={"100dvh"}
       sx={{
         "@keyframes fadeOut": {
           from: { opacity: 1 },

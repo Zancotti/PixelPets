@@ -38,7 +38,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame }) => {
   return (
     <Box
       sx={{
-        height: "100%",
+        height: "100dvh",
         display: "grid",
         gridTemplateRows: "auto auto auto 1fr auto",
       }}
