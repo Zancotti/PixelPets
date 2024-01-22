@@ -151,7 +151,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
         <Text
           p={6}
           color="#2C130F"
-          fontSize="1.5em"
+          fontSize="1.25em"
           background="#E5E0D7"
           sx={{
             boxShadow: `0 0 0 2px #E3DED6,

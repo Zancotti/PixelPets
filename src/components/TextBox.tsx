@@ -20,7 +20,7 @@ const TextBox: React.FC<TextBoxProps> = ({ text }) => {
           border: "2px solid #c8b2a1",
         }}
       >
-        <Text color="#2C130F" fontSize="1.5em">
+        <Text color="#2C130F" fontSize="1.25em">
           {text}{" "}
         </Text>
       </Box>
