@@ -4,14 +4,21 @@ import StartScreen from "./StartScreen";
 import SelectEgg from "./SelectEgg";
 import PetHome from "./PetHome";
 import { backgroundColor, orangeColor } from "../colors";
+import { usePixelPetsContext } from "../hooks/usePixelPetsContext";
 
 type GameView = "startScreen" | "selectEgg" | "petHome";
 
 const Main: React.FC = () => {
   const [gameView, setGameView] = useState<GameView>("startScreen");
+  const { setSelectedEgg, setSelectedPetFood } = usePixelPetsContext();
 
   const onNavigateTo = (view: GameView) => {
     setGameView(view);
+  };
+  const restartGame = () => {
+    setSelectedEgg(null);
+    setSelectedPetFood("");
+    setGameView("startScreen");
   };
 
   return (
@@ -29,7 +36,7 @@ const Main: React.FC = () => {
         {gameView === "selectEgg" && (
           <SelectEgg onCancelGame={() => onNavigateTo("startScreen")} onContinue={() => onNavigateTo("petHome")} />
         )}
-        {gameView === "petHome" && <PetHome onRestartGame={() => onNavigateTo("startScreen")} />}
+        {gameView === "petHome" && <PetHome onRestartGame={() => restartGame()} />}
       </Box>
     </Box>
   );

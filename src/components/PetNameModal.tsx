@@ -28,13 +28,6 @@ const PetNameModal: React.FC<PetNameModalProps> = ({ isOpen, onClose, setPetName
     onClose();
   };
 
-  useEffect(() => {
-    // Focus on the input when the modal is opened
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isOpen]);
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     // Submit on Enter key press
     if (event.key === "Enter" && name !== "") {
