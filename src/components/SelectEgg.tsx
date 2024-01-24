@@ -44,9 +44,9 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       fadeIn: fadeInEgg2,
       type: "dog",
       petSrc: {
-        happy: "./pictures/cat_happy.webp",
-        sad: "./pictures/cat_sad.webp",
-        neutral: "./pictures/cat_neutral.webp",
+        happy: "./pictures/dog_happy.webp",
+        sad: "./pictures/dog_sad.webp",
+        neutral: "./pictures/dog_neutral.webp",
       },
     },
     {
@@ -55,9 +55,9 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       fadeIn: fadeInEgg3,
       type: "turtle",
       petSrc: {
-        happy: "./pictures/cat_happy.webp",
-        sad: "./pictures/cat_sad.webp",
-        neutral: "./pictures/cat_neutral.webp",
+        happy: "./pictures/turtle_happy.webp",
+        sad: "./pictures/turtle_sad.webp",
+        neutral: "./pictures/turtle_neutral.webp",
       },
     },
   ];
