@@ -39,7 +39,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       },
     },
     {
-      eggSrc: "./pictures/egg.webp",
+      eggSrc: "./pictures/egg_2.webp",
       id: 2,
       fadeIn: fadeInEgg2,
       type: "dog",
@@ -50,7 +50,7 @@ const SelectEgg: React.FC<SelectEggProps> = ({ onCancelGame, onContinue }) => {
       },
     },
     {
-      eggSrc: "./pictures/egg.webp",
+      eggSrc: "./pictures/egg_3.webp",
       id: 3,
       fadeIn: fadeInEgg3,
       type: "turtle",
